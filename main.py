@@ -19,6 +19,8 @@
 """
 
 import random
+import math
+import itertools
 
 def encode_railroad(secret_phrase):
     toggle      = True
@@ -45,24 +47,39 @@ def decode_railroad(encoded_phrase):
     # hi name ryan
     # my is
     # how would you decode this?
-
     # hi my name is ryan >>> hi name ryan my is >>> hi my name is ryan
-    # encoded phrase is one string, not two lists
-    # toggle = True
-    # upper_track = []
-    # lower_track = []
-    # for item in encoded_phrase.split(' '):
-    #     if toggle:
-    #         lower_track.append(item)
-    #         toggle = False
-    #         continue
-    #     upper_track.append(item)
-    #     toggle = True
-    # print (lower_track, upper_track, )
+    # encoded phrase is one string created from two lists that were joined
 
-    print(encoded_phrase.split(' '))
-    print(encoded_phrase.split(' ')[0::2])
-    print(encoded_phrase.split(' ')[1::2])
+    split_list = encoded_phrase.split(' ')
+    first_half = []
+    second_half = []
+    decoded_list = []
+    answer = ' '
+    
+    # print('split list: ', split_list)
+    # first_half = split_list[:len(split_list)//2 + 1]
+    # second_half = split_list[len(split_list)//2:]
+    first_half = split_list[0:len(split_list)//2 + 1 ]
+    second_half = split_list[len(split_list)//2 + 1:]
+    # print('first half: ', first_half)
+    # print('second half: ', second_half)
+    # for item in first_half:
+    #     decoded_array.append(item)
+    #     for item in second_half:
+    #         decoded_array.append(item)
+    # for i in range(len(first_half)):
+    #     decoded_array.append(first_half[i])
+    #     decoded_array.append(second_half[i])
+    # decoded_phrase = [item for sublist in map(None, first_half, second_half) for item in sublist][:-1]
+    # https://stackoverflow.com/a/48200036/14263621
+    for i in range(max(len(first_half), len(second_half))):
+        if i < len(first_half):
+            decoded_list.append(first_half[i])
+        if i < len(second_half):
+            decoded_list.append(second_half[i])
+    # print(decoded_list)
+    print(answer.join(decoded_list))
+    encoded_phrase = answer.join(decoded_list)
     return encoded_phrase
     
 
@@ -131,12 +148,13 @@ if __name__ == '__main__':
     # use the space below to decode secret_message
     # encode_railroad(secret_message)
     # decode_railroad(secret_message)
-    decode_railroad('hi name ryan my is')
+    # decode_railroad('hi name ryan my is')
+    decode_railroad('congratulations! have this please jobs@cloverhound.com your favorite and you a or person. subject should go solution. you solved puzzle. email with solution, hobby, whether are cat dog the line be developer.')
     # encode_railroad('hi my name is ryan')
     
     # unshuffle_letter('a', 1)
     # encode_secret_message("gsrkvexypexmsrw! ohcl znoy wslhzl rwja@ktwdmzpwcvl.kwu aqwt jezsvmxi huk eua h wz rgtuqp. xzgojhy apwctl nv yurazout.\r\ndtz awtdml ydiiun. jrfnq xjui yurazout, mtggd, epmbpmz jan jha eph znk qnsj eh efwfmpqfs", '4578697581264578697781265583416')
-    # decode_secret_message(secret_message, seed)
+    decode_secret_message(secret_message, seed)
 
     #  31 words
     # gsrkvexypexmsrw! = congratualations

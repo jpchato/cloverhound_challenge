@@ -64,6 +64,7 @@ def encode_secret_message(secret_message, seed):
             caesared_word += shuffle_letter(char, caesar_seed)
         encoded_message += "{} ".format(caesared_word)
         index += 1
+    
     return encode_railroad(encoded_message)
 
 if __name__ == '__main__':
@@ -80,3 +81,4 @@ if __name__ == '__main__':
     # end optional code
 
     # use the space below to decode secret_message
+    
